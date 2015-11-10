@@ -1,0 +1,31 @@
+<!--header-->
+<div app-header app-name="Contact Center Workflow">
+	<ul class="nav navbar-nav">
+		<li>
+			<a app-header-current-item href="#call/inbound">
+				<span class="glyphicon glyphicon-incomingcall"></span> Inbound
+			</a>
+		</li>
+		<li>
+			<a app-header-current-item href="#call/outbound">
+				<span class="glyphicon glyphicon-outgoingcall"></span> Outbound
+			</a>
+		</li>
+		<li>
+			<a app-header-current-item href="#call/search">
+				<span class="glyphicon glyphicon-search"></span> Search
+			</a>
+		</li>
+	</ul>
+</div>
+<!--/header-->
+
+<!--http-errors-box-->
+<div http-errors-box></div>
+<!--/http-errors-box-->
+
+<!--container-->
+<div ng-controller="mainController">
+	<ng:view></ng:view>
+</div>
+<!--/container-->

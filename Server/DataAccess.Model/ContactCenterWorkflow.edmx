@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ContactCenterWorkflowModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ContactCenterWorkflowModelStoreContainer">
+          <EntitySet Name="Processes" EntityType="ContactCenterWorkflowModel.Store.Processes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProcessReasons" EntityType="ContactCenterWorkflowModel.Store.ProcessReasons" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProcessSteps" EntityType="ContactCenterWorkflowModel.Store.ProcessSteps" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Reasons" EntityType="ContactCenterWorkflowModel.Store.Reasons" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Steps" EntityType="ContactCenterWorkflowModel.Store.Steps" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ProcessReason_Reasons" Association="ContactCenterWorkflowModel.Store.FK_ProcessReason_Reasons">
+            <End Role="Reasons" EntitySet="Reasons" />
+            <End Role="ProcessReasons" EntitySet="ProcessReasons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcessReasons_Processes" Association="ContactCenterWorkflowModel.Store.FK_ProcessReasons_Processes">
+            <End Role="Processes" EntitySet="Processes" />
+            <End Role="ProcessReasons" EntitySet="ProcessReasons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcessSteps_Processes" Association="ContactCenterWorkflowModel.Store.FK_ProcessSteps_Processes">
+            <End Role="Processes" EntitySet="Processes" />
+            <End Role="ProcessSteps" EntitySet="ProcessSteps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcessSteps_Steps" Association="ContactCenterWorkflowModel.Store.FK_ProcessSteps_Steps">
+            <End Role="Steps" EntitySet="Steps" />
+            <End Role="ProcessSteps" EntitySet="ProcessSteps" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Processes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CallType" Type="int" Nullable="false" />
+          <Property Name="CallerType" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="ProcessReasons">
+          <Key>
+            <PropertyRef Name="ProcessId" />
+            <PropertyRef Name="ReasonId" />
+          </Key>
+          <Property Name="ProcessId" Type="int" Nullable="false" />
+          <Property Name="ReasonId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProcessSteps">
+          <Key>
+            <PropertyRef Name="ProcessId" />
+            <PropertyRef Name="StepId" />
+          </Key>
+          <Property Name="ProcessId" Type="int" Nullable="false" />
+          <Property Name="StepId" Type="int" Nullable="false" />
+          <Property Name="Mandatory" Type="bit" Nullable="false" />
+          <Property Name="Params" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Reasons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Steps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_ProcessReason_Reasons">
+          <End Role="Reasons" Type="ContactCenterWorkflowModel.Store.Reasons" Multiplicity="1" />
+          <End Role="ProcessReasons" Type="ContactCenterWorkflowModel.Store.ProcessReasons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reasons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcessReasons">
+              <PropertyRef Name="ReasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcessReasons_Processes">
+          <End Role="Processes" Type="ContactCenterWorkflowModel.Store.Processes" Multiplicity="1" />
+          <End Role="ProcessReasons" Type="ContactCenterWorkflowModel.Store.ProcessReasons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Processes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcessReasons">
+              <PropertyRef Name="ProcessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcessSteps_Processes">
+          <End Role="Processes" Type="ContactCenterWorkflowModel.Store.Processes" Multiplicity="1" />
+          <End Role="ProcessSteps" Type="ContactCenterWorkflowModel.Store.ProcessSteps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Processes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcessSteps">
+              <PropertyRef Name="ProcessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcessSteps_Steps">
+          <End Role="Steps" Type="ContactCenterWorkflowModel.Store.Steps" Multiplicity="1" />
+          <End Role="ProcessSteps" Type="ContactCenterWorkflowModel.Store.ProcessSteps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Steps">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcessSteps">
+              <PropertyRef Name="StepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ContactCenterWorkflowModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ContactCenterWorkflowEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Processes" EntityType="ContactCenterWorkflowModel.Process" />
+          <EntitySet Name="ProcessSteps" EntityType="ContactCenterWorkflowModel.ProcessStep" />
+          <EntitySet Name="Reasons" EntityType="ContactCenterWorkflowModel.Reason" />
+          <EntitySet Name="Steps" EntityType="ContactCenterWorkflowModel.Step" />
+          <AssociationSet Name="FK_ProcessSteps_Processes" Association="ContactCenterWorkflowModel.FK_ProcessSteps_Processes">
+            <End Role="Process" EntitySet="Processes" />
+            <End Role="ProcessStep" EntitySet="ProcessSteps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcessSteps_Steps" Association="ContactCenterWorkflowModel.FK_ProcessSteps_Steps">
+            <End Role="Step" EntitySet="Steps" />
+            <End Role="ProcessStep" EntitySet="ProcessSteps" />
+          </AssociationSet>
+          <AssociationSet Name="ProcessReasons" Association="ContactCenterWorkflowModel.ProcessReasons">
+            <End Role="Reason" EntitySet="Reasons" />
+            <End Role="Process" EntitySet="Processes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Process">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CallType" Nullable="false" />
+          <Property Type="Int32" Name="CallerType" Nullable="false" />
+          <Property Type="Int32" Name="SortOrder" />
+          <NavigationProperty Name="ProcessSteps" Relationship="ContactCenterWorkflowModel.FK_ProcessSteps_Processes" FromRole="Process" ToRole="ProcessStep" />
+          <NavigationProperty Name="Reasons" Relationship="ContactCenterWorkflowModel.ProcessReasons" FromRole="Process" ToRole="Reason" />
+        </EntityType>
+        <EntityType Name="ProcessStep">
+          <Key>
+            <PropertyRef Name="ProcessId" />
+            <PropertyRef Name="StepId" />
+          </Key>
+          <Property Type="Int32" Name="ProcessId" Nullable="false" />
+          <Property Type="Int32" Name="StepId" Nullable="false" />
+          <Property Type="Boolean" Name="Mandatory" Nullable="false" />
+          <Property Type="String" Name="Params" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Process" Relationship="ContactCenterWorkflowModel.FK_ProcessSteps_Processes" FromRole="ProcessStep" ToRole="Process" />
+          <NavigationProperty Name="Step" Relationship="ContactCenterWorkflowModel.FK_ProcessSteps_Steps" FromRole="ProcessStep" ToRole="Step" />
+        </EntityType>
+        <EntityType Name="Reason">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Processes" Relationship="ContactCenterWorkflowModel.ProcessReasons" FromRole="Reason" ToRole="Process" />
+        </EntityType>
+        <EntityType Name="Step">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProcessSteps" Relationship="ContactCenterWorkflowModel.FK_ProcessSteps_Steps" FromRole="Step" ToRole="ProcessStep" />
+        </EntityType>
+        <Association Name="FK_ProcessSteps_Processes">
+          <End Type="ContactCenterWorkflowModel.Process" Role="Process" Multiplicity="1" />
+          <End Type="ContactCenterWorkflowModel.ProcessStep" Role="ProcessStep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Process">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcessStep">
+              <PropertyRef Name="ProcessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcessSteps_Steps">
+          <End Type="ContactCenterWorkflowModel.Step" Role="Step" Multiplicity="1" />
+          <End Type="ContactCenterWorkflowModel.ProcessStep" Role="ProcessStep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Step">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcessStep">
+              <PropertyRef Name="StepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProcessReasons">
+          <End Type="ContactCenterWorkflowModel.Reason" Role="Reason" Multiplicity="*" />
+          <End Type="ContactCenterWorkflowModel.Process" Role="Process" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ContactCenterWorkflowModelStoreContainer" CdmEntityContainer="ContactCenterWorkflowEntities">
+          <EntitySetMapping Name="Processes">
+            <EntityTypeMapping TypeName="ContactCenterWorkflowModel.Process">
+              <MappingFragment StoreEntitySet="Processes">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="CallerType" ColumnName="CallerType" />
+                <ScalarProperty Name="CallType" ColumnName="CallType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcessSteps">
+            <EntityTypeMapping TypeName="ContactCenterWorkflowModel.ProcessStep">
+              <MappingFragment StoreEntitySet="ProcessSteps">
+                <ScalarProperty Name="Params" ColumnName="Params" />
+                <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+                <ScalarProperty Name="StepId" ColumnName="StepId" />
+                <ScalarProperty Name="ProcessId" ColumnName="ProcessId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reasons">
+            <EntityTypeMapping TypeName="ContactCenterWorkflowModel.Reason">
+              <MappingFragment StoreEntitySet="Reasons">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Steps">
+            <EntityTypeMapping TypeName="ContactCenterWorkflowModel.Step">
+              <MappingFragment StoreEntitySet="Steps">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProcessReasons" TypeName="ContactCenterWorkflowModel.ProcessReasons" StoreEntitySet="ProcessReasons">
+            <EndProperty Name="Process">
+              <ScalarProperty Name="Id" ColumnName="ProcessId" />
+            </EndProperty>
+            <EndProperty Name="Reason">
+              <ScalarProperty Name="Id" ColumnName="ReasonId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

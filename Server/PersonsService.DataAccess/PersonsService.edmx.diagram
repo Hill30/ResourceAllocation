@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc0fc1cfb5c747f88f9b8c1fe4fc60b7" Name="Diagram1">
+        <EntityTypeShape EntityType="PersonsServiceModel.Branch" Width="1.5" PointX="0.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PersonsServiceModel.Client" Width="1.5" PointX="4.375" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PersonsServiceModel.Employee" Width="1.5" PointX="5.125" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="PersonsServiceModel.Team" Width="1.5" PointX="9.625" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="PersonsServiceModel.FK_dbo_Clients_dbo_Branches_BranchId" ManuallyRouted="false" />
+        <AssociationConnector Association="PersonsServiceModel.FK_dbo_Employees_dbo_Branches_BranchId" ManuallyRouted="false" />
+        <AssociationConnector Association="PersonsServiceModel.BranchTeams" ManuallyRouted="false" />
+        <AssociationConnector Association="PersonsServiceModel.ClientTeams" ManuallyRouted="false" />
+        <AssociationConnector Association="PersonsServiceModel.EmployeeTeams" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PersonsServiceModel.ClientNote" Width="1.5" PointX="8" PointY="2" />
+        <EntityTypeShape EntityType="PersonsServiceModel.EmployeeNote" Width="1.5" PointX="8.125" PointY="9.75" />
+        <AssociationConnector Association="PersonsServiceModel.FK_dbo_ClientNotes_dbo_Client_Id" />
+        <AssociationConnector Association="PersonsServiceModel.FK_dbo_EmployeeNotes_dbo_Employees_Id" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

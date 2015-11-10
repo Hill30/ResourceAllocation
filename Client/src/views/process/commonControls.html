@@ -1,0 +1,19 @@
+<div class="actions-wrap">
+	<div class="row">
+		<div class="col-xs-4">
+			<a class="btn btn-default" ng-click="cancelProcess()" ng-disabled="!processContainer.isCompleteAvailable">
+				Cancel
+			</a>
+		</div>
+		<div class="col-xs-8">
+			<a class="btn btn-primary" ng-click="processContainer.completeProcess()" ng-disabled="!processContainer.isCompleteAvailable">
+				<span class="glyphicon glyphicon-checkmark"></span>
+				Complete {{process.name}}
+			</a>
+			<a class="btn btn-primary" ng-click="nextStep.exec()" ng-disabled="!processContainer.isNextStepAvailable">
+				Next
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+		</div>
+	</div>
+</div>

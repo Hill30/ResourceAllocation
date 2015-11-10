@@ -1,0 +1,111 @@
+<div ng-controller="visitsController">
+
+	<!--h1 class="grid-title">December 9-12</h1-->
+
+	<!--grid-->
+	<div class="grid grid-visits">
+
+		<!--grid-heading-->
+		<div class="grid-heading">
+
+			<!--grid-cols-row-->
+			<div class="grid-cols-row">
+
+				<!--check-->
+				<div class="grid-col-check">
+					<input ng-click="pickAllVisits()" type="checkbox" ng-checked="allVisitsSelected">
+				</div>
+				<!--/check-->
+
+				<!--name-->
+				<div class="grid-col-name">
+					Name
+				</div>
+				<!--/name-->
+
+				<!--date-->
+				<div class="grid-col-date">
+					Date
+				</div>
+				<!--/date-->
+
+				<!--time-->
+				<div class="grid-col-time">
+					Time
+				</div>
+				<!--/time-->
+
+				<!--note-->
+				<div class="grid-col-note">
+					Notes
+				</div>
+				<!--/note-->
+
+			</div>
+			<!--/grid-cols-row-->
+
+		</div>
+		<!--grid-heading-->
+
+		<!--grid-body-->
+		<div class="grid-body">
+
+			<!--grid-body-scroll-->
+			<div class="grid-body-scroll">
+
+				<!--grid-cols-row-->
+				<div class="grid-cols-row"
+					 ng-repeat="visit in visits"
+					 ng-click="pickVisit(visit)">
+
+					<!--check-->
+					<div class="grid-col-check">
+						<input type="checkbox" ng-checked="visit.selected">
+					</div>
+					<!--/check-->
+
+					<!--icon-->
+					<div class="grid-col-icon">
+						<span class="glyphicon glyphicon-user"></span>
+					</div>
+					<!--/icon-->
+
+					<!--name-->
+					<div class="grid-col-name">
+						{{visit.personName}}
+					</div>
+					<!--/name-->
+
+					<!--date-->
+					<div class="grid-col-date">
+						{{visit.date}}
+					</div>
+					<!--/date-->
+
+					<!--time-->
+					<div class="grid-col-time">
+						{{visit.startTime}} - {{visit.endTime}}
+					</div>
+					<!--/time-->
+
+					<!--note-->
+					<div class="grid-col-note">
+						<a ng-click="openNotes(visit); $event.stopPropagation();">
+							<span class="glyphicon glyphicon-comments"></span>
+						</a>
+					</div>
+					<!--/note-->
+
+				</div>
+				<!--/grid-cols-row-->
+
+			</div>
+			<!--/grid-body-scroll-->
+
+		</div>
+		<!--/grid-body-->
+
+	</div>
+	<!--/grid-->
+
+</div>

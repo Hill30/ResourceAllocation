@@ -1,0 +1,111 @@
+<!--grid-->
+<div class="grid grid-inbound">
+
+	<!--grid-heading-->
+	<div class="grid-heading">
+
+		<!--grid-cols-row-->
+		<div class="grid-cols-row">
+
+			<!--name-->
+			<div class="grid-col-name sort"
+				 ng-click="setSort('name')"
+				 ng-class="{ 'sort-down': sortPredicate('name', 'asc'), 'sort-up': sortPredicate('name', 'desc') }">
+				Name
+			</div>
+			<!--/name-->
+
+			<!--phone-->
+			<div class="grid-col-phone sort"
+				 ng-click="setSort('phone')"
+				 ng-class="{ 'sort-down': sortPredicate('phone', 'asc'), 'sort-up': sortPredicate('phone', 'desc') }">
+				Phone
+			</div>
+			<!--/phone-->
+
+			<!--location-->
+			<div class="grid-col-location sort"
+				 ng-click="setSort('location')"
+				 ng-class="{ 'sort-down': sortPredicate('location', 'asc'), 'sort-up': sortPredicate('location', 'desc') }">
+				Location
+			</div>
+			<!--/location-->
+
+			<!--type-->
+			<div class="grid-col-type sort"
+				 ng-click="setSort('type')"
+				 ng-class="{ 'sort-down': sortPredicate('type', 'asc'), 'sort-up': sortPredicate('type', 'desc') }">
+				Type
+			</div>
+			<!--/type-->
+
+		</div>
+		<!--/grid-cols-row-->
+
+	</div>
+	<!--grid-heading-->
+
+	<!--grid-body-->
+	<div class="grid-body">
+
+		<!--grid-body-scroll-->
+		<div class="grid-body-scroll" ui-scroll-viewport>
+
+			<!--grid-cols-row-->
+			<a class="grid-cols-row"
+			   ui-scroll="person in personsDatasource"
+			   buffer-size="40"
+			   ng-click="pickPerson(person)">
+
+				<!--icon-->
+					<span class="grid-col-icon">
+						 <span ng-show="person.type == 'C'" class="glyphicon glyphicon-user"></span>
+						 <span ng-show="person.type == 'E'" class="glyphicon glyphicon-user-2"></span>
+					</span>
+				<!--/icon-->
+
+				<!--name-->
+					<span class="grid-col-name">
+						{{person.name}}
+					</span>
+				<!--/name-->
+
+				<!--phone-->
+					<span class="grid-col-phone">
+						{{person.phone}}
+					</span>
+				<!--/phone-->
+
+				<!--location-->
+					<span class="grid-col-location">
+						{{person.location}}
+					</span>
+				<!--/location-->
+
+				<!--type-->
+					<span class="grid-col-type">
+						<span ng-if="person.type == 'E'">Employee</span>
+						<span ng-if="person.type == 'C'">Client</span>
+					</span>
+				<!--/type-->
+
+			</a>
+			<!--/grid-cols-row-->
+
+		</div>
+		<!--/grid-body-scroll-->
+
+
+	</div>
+	<!--/grid-body-->
+
+	<!--grid-body-actions-->
+	<!--<div class="grid-body-actions">
+		<a class="btn btn-default">
+			Cancel
+		</a>
+	</div>-->
+	<!--/grid-body-actions-->
+
+</div>
+<!--/grid-->

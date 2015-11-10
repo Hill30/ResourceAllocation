@@ -1,0 +1,123 @@
+<!--aside-->
+<div class="aside">
+
+	<!--heading-->
+	<div class="heading-wrap user-card">
+		<h3 class="type">
+			<span ng-show="person.type == 'E'">Employee</span>
+			<span ng-show="person.type == 'C'">Client</span>
+		</h3>
+		<h1 class="heading">
+			<span class="glyphicon glyphicon-user-2"></span>
+			{{person.name}}
+		</h1>
+		<div class="phone">{{person.phone}}</div>
+	</div>
+	<!--/heading-->
+
+	<!--branch-->
+	<div class="data-group">
+
+		<label class="data-label">
+			<span class="glyphicon glyphicon-tree"></span>
+			Branch
+		</label>
+
+		<div class="data-body">
+			<div class="data-text">
+				{{person.branch.name}}
+			</div>
+		</div>
+
+	</div>
+	<!--/branch-->
+
+	<!--team-->
+	<div class="data-group">
+
+		<label class="data-label">
+			<span class="glyphicon glyphicon-users"></span>
+			Team
+		</label>
+
+		<div class="data-body">
+			<div class="data-text">
+				{{person.team.name}}
+			</div>
+		</div>
+
+	</div>
+	<!--/team-->
+
+	<!--case manager-->
+	<div class="data-group">
+
+		<label class="data-label">
+			<span class="glyphicon glyphicon-user-2"></span>
+			Case Manager
+		</label>
+
+		<div class="data-body">
+			<div class="data-text">
+				{{person.manager.name}}
+			</div>
+		</div>
+
+	</div>
+	<!--/case manager-->
+
+	<!--technology-->
+	<div class="data-group" ng-show="person.type == 'E'">
+
+		<label class="data-label">
+			<span class="glyphicon glyphicon-cog"></span>
+			Technology
+		</label>
+
+		<div class="data-body">
+			<div class="data-text">
+				{{person.technology}}
+			</div>
+		</div>
+
+	</div>
+	<!--/technology-->
+
+	<!--caregiver-->
+	<div class="data-group" ng-show="person.type == 'E'">
+
+		<label class="data-label">
+			<span class="glyphicon glyphicon-support"></span>
+			Family Caregiver
+		</label>
+
+		<div class="data-body">
+			<div class="data-text">
+				<span ng-show="person.isFamilyCaregiver">YES</span>
+				<span ng-show="!person.isFamilyCaregiver">NO</span>
+			</div>
+		</div>
+
+	</div>
+	<!--/caregiver-->
+
+	<!--notes-->
+	<div class="data-group" ng-show="person.lastNote && person.lastNote.text">
+
+		<label class="data-label">
+			<span class="glyphicon glyphicon-comments"></span>
+			Recent Notes
+		</label>
+
+		<div class="data-body">
+			<div class="data-text">
+				{{person.lastNote.text}}
+				<a ng-click="openNotesDialog()">Read more...</a>
+			</div>
+		</div>
+
+	</div>
+	<!--notes-->
+
+</div>
+<!--/aside-->

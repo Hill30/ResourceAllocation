@@ -1,0 +1,47 @@
+<!--aside-->
+<div class="aside">
+
+	<!--heading-->
+	<div class="heading-wrap">
+		<h1 class="heading">
+			<span class="glyphicon glyphicon-incomingcall"></span>
+			Inbound Call
+		</h1>
+
+		<div class="time-current">12:15:03 <span>PM</span></div>
+	</div>
+	<!--/heading-->
+
+	<!--search-->
+	<div class="data-group">
+
+		<!--data-label-->
+		<label class="data-label">
+			<span class="glyphicon glyphicon-search"></span>
+			Search
+		</label>
+		<!--/data-label-->
+
+		<!--data-body-->
+		<div class="data-body">
+			<!--form-control-->
+			<div class="form-control-wrap">
+				<a class="input-clean" ng-click="filters.searchString = ''">
+					<span class="glyphicon glyphicon-close"></span>
+				</a>
+				<input
+						class="form-control input-sm"
+						placeholder="Enter Phone or Name"
+						ng-model="filters.searchString"
+						type="text">
+			</div>
+			<!--form-control-->
+
+		</div>
+		<!--/data-body-->
+
+	</div>
+	<!--/search-->
+
+</div>
+<!--/aside-->

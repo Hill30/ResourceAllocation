@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="043f1de0edf64d64a60221ba2a5fb436" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="SchedulingServiceDataAccessModel.Branch" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulingServiceDataAccessModel.ClientNote" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulingServiceDataAccessModel.Client" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulingServiceDataAccessModel.EmployeeNote" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulingServiceDataAccessModel.Employee" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulingServiceDataAccessModel.Schedule" Width="1.5" PointX="11.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulingServiceDataAccessModel.Team" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <AssociationConnector Association="SchedulingServiceDataAccessModel.FK_dbo_Clients_dbo_Branches_BranchId" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulingServiceDataAccessModel.FK_dbo_Employees_dbo_Branches_BranchId" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulingServiceDataAccessModel.FK_dbo_ClientNotes_dbo_Client_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulingServiceDataAccessModel.FK_dbo_Schedules_dbo_Client_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulingServiceDataAccessModel.FK_dbo_EmployeeNotes_dbo_Employees_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulingServiceDataAccessModel.FK_dbo_Schedules_dbo_Employees_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulingServiceDataAccessModel.BranchTeams" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulingServiceDataAccessModel.ClientTeams" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulingServiceDataAccessModel.EmployeeTeams" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

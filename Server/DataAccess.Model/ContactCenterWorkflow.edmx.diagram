@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="91f7925891834a04b19c06fb10ac737e" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="ContactCenterWorkflowModel.sysdiagram" Width="1.5" PointX="10.122812132408289" PointY="2.6339676839457673" />
+        <EntityTypeShape EntityType="ContactCenterWorkflowModel.Process" Width="1.5" PointX="20.375" PointY="0.5" />
+        <EntityTypeShape EntityType="ContactCenterWorkflowModel.ProcessStep" Width="1.5" PointX="23.375" PointY="2" />
+        <EntityTypeShape EntityType="ContactCenterWorkflowModel.Reason" Width="1.5" PointX="26.375" PointY="3.5" />
+        <EntityTypeShape EntityType="ContactCenterWorkflowModel.Step" Width="1.5" PointX="26.5" PointY="0.5" />
+        <AssociationConnector Association="ContactCenterWorkflowModel.FK_ProcessSteps_Processes" />
+        <AssociationConnector Association="ContactCenterWorkflowModel.FK_ProcessSteps_Steps" />
+        <AssociationConnector Association="ContactCenterWorkflowModel.ProcessReasons" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

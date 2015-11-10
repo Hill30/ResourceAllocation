@@ -1,0 +1,25 @@
+<div ng-controller="datesController">
+
+	<!--datepicker-->
+	<datepicker ng-model="pickerValue" class="datepicker" show-weeks="false" range-select="selectedDates"></datepicker>
+	<!--/datepicker-->
+
+	<!--datepicker-info-->
+	<div class="datepicker-info">
+		<div class="row">
+			<div class="col-xs-10 col-text">
+				<span ng-show="selectedDate">
+					Selected date: {{selectedDate.viewValue}}
+				</span>
+				<span ng-show="dateFrom">
+					Selected range: {{dateFrom.viewValue}}
+				</span>
+				<span ng-show="dateTo">
+					- {{dateTo.viewValue}}
+				</span>
+			</div>
+		</div>
+	</div>
+	<!--datepicker-info-->
+
+</div>

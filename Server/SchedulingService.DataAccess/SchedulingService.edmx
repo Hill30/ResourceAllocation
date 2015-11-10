@@ -1,0 +1,741 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SchedulingServiceDataAccessModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="SchedulingServiceDataAccessModelStoreContainer">
+          <EntitySet Name="Branches" EntityType="SchedulingServiceDataAccessModel.Store.Branches" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BranchTeams" EntityType="SchedulingServiceDataAccessModel.Store.BranchTeams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ClientNotes" EntityType="SchedulingServiceDataAccessModel.Store.ClientNotes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Clients" EntityType="SchedulingServiceDataAccessModel.Store.Clients" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ClientTeams" EntityType="SchedulingServiceDataAccessModel.Store.ClientTeams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmployeeNotes" EntityType="SchedulingServiceDataAccessModel.Store.EmployeeNotes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employees" EntityType="SchedulingServiceDataAccessModel.Store.Employees" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmployeeTeams" EntityType="SchedulingServiceDataAccessModel.Store.EmployeeTeams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Schedules" EntityType="SchedulingServiceDataAccessModel.Store.Schedules" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Teams" EntityType="SchedulingServiceDataAccessModel.Store.Teams" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_dbo_BranchTeams_dbo_Branches_Branch_Id" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_BranchTeams_dbo_Branches_Branch_Id">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="BranchTeams" EntitySet="BranchTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BranchTeams_dbo_Teams_Team_Id" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_BranchTeams_dbo_Teams_Team_Id">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="BranchTeams" EntitySet="BranchTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientNotes_dbo_Client_Id" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_ClientNotes_dbo_Client_Id">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientNotes" EntitySet="ClientNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Clients_dbo_Branches_BranchId" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_Clients_dbo_Branches_BranchId">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientTeams_dbo_Clients_Client_Id" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_ClientTeams_dbo_Clients_Client_Id">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientTeams" EntitySet="ClientTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientTeams_dbo_Teams_Team_Id" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_ClientTeams_dbo_Teams_Team_Id">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="ClientTeams" EntitySet="ClientTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EmployeeNotes_dbo_Employees_Id" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_EmployeeNotes_dbo_Employees_Id">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeeNotes" EntitySet="EmployeeNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_Branches_BranchId" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_Employees_dbo_Branches_BranchId">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EmployeeTeams_dbo_Employees_Employee_Id" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_EmployeeTeams_dbo_Employees_Employee_Id">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeeTeams" EntitySet="EmployeeTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EmployeeTeams_dbo_Teams_Team_Id" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_EmployeeTeams_dbo_Teams_Team_Id">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="EmployeeTeams" EntitySet="EmployeeTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Schedules_dbo_Client_Id" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_Schedules_dbo_Client_Id">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Schedules" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Schedules_dbo_Employees_Id" Association="SchedulingServiceDataAccessModel.Store.FK_dbo_Schedules_dbo_Employees_Id">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Schedules" EntitySet="Schedules" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Branches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BranchTeams">
+          <Key>
+            <PropertyRef Name="Branch_Id" />
+            <PropertyRef Name="Team_Id" />
+          </Key>
+          <Property Name="Branch_Id" Type="int" Nullable="false" />
+          <Property Name="Team_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientNotes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Client_Id" Type="int" Nullable="false" />
+          <Property Name="Author" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Text" Type="text" />
+          <Property Name="CreatedAt" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ExtId" Type="int" />
+          <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="10" />
+          <Property Name="PseudoPerson" Type="bit" Nullable="false" />
+          <Property Name="FamilyCaregiverClient" Type="bit" Nullable="false" />
+          <Property Name="IvrClient" Type="bit" Nullable="false" />
+          <Property Name="ManagedCareClient" Type="bit" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" />
+        </EntityType>
+        <EntityType Name="ClientTeams">
+          <Key>
+            <PropertyRef Name="Client_Id" />
+            <PropertyRef Name="Team_Id" />
+          </Key>
+          <Property Name="Client_Id" Type="int" Nullable="false" />
+          <Property Name="Team_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeNotes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Id" Type="int" Nullable="false" />
+          <Property Name="Author" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Text" Type="text" />
+          <Property Name="CreatedAt" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ExtId" Type="int" />
+          <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsAmpUser" Type="bit" Nullable="false" />
+          <Property Name="PseudoPerson" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeTeams">
+          <Key>
+            <PropertyRef Name="Employee_Id" />
+            <PropertyRef Name="Team_Id" />
+          </Key>
+          <Property Name="Employee_Id" Type="int" Nullable="false" />
+          <Property Name="Team_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Source" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="ExtId" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="ServiceCode" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="StartTime" Type="time" Nullable="false" />
+          <Property Name="EndTime" Type="time" Nullable="false" />
+          <Property Name="CreatedAt" Type="date" Nullable="false" />
+          <Property Name="LastModified" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="40" />
+        </EntityType>
+        <Association Name="FK_dbo_BranchTeams_dbo_Branches_Branch_Id">
+          <End Role="Branches" Type="SchedulingServiceDataAccessModel.Store.Branches" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BranchTeams" Type="SchedulingServiceDataAccessModel.Store.BranchTeams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BranchTeams">
+              <PropertyRef Name="Branch_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BranchTeams_dbo_Teams_Team_Id">
+          <End Role="Teams" Type="SchedulingServiceDataAccessModel.Store.Teams" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BranchTeams" Type="SchedulingServiceDataAccessModel.Store.BranchTeams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BranchTeams">
+              <PropertyRef Name="Team_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClientNotes_dbo_Client_Id">
+          <End Role="Clients" Type="SchedulingServiceDataAccessModel.Store.Clients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClientNotes" Type="SchedulingServiceDataAccessModel.Store.ClientNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientNotes">
+              <PropertyRef Name="Client_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Clients_dbo_Branches_BranchId">
+          <End Role="Branches" Type="SchedulingServiceDataAccessModel.Store.Branches" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Clients" Type="SchedulingServiceDataAccessModel.Store.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClientTeams_dbo_Clients_Client_Id">
+          <End Role="Clients" Type="SchedulingServiceDataAccessModel.Store.Clients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClientTeams" Type="SchedulingServiceDataAccessModel.Store.ClientTeams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientTeams">
+              <PropertyRef Name="Client_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClientTeams_dbo_Teams_Team_Id">
+          <End Role="Teams" Type="SchedulingServiceDataAccessModel.Store.Teams" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClientTeams" Type="SchedulingServiceDataAccessModel.Store.ClientTeams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientTeams">
+              <PropertyRef Name="Team_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EmployeeNotes_dbo_Employees_Id">
+          <End Role="Employees" Type="SchedulingServiceDataAccessModel.Store.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EmployeeNotes" Type="SchedulingServiceDataAccessModel.Store.EmployeeNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeNotes">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employees_dbo_Branches_BranchId">
+          <End Role="Branches" Type="SchedulingServiceDataAccessModel.Store.Branches" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employees" Type="SchedulingServiceDataAccessModel.Store.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EmployeeTeams_dbo_Employees_Employee_Id">
+          <End Role="Employees" Type="SchedulingServiceDataAccessModel.Store.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EmployeeTeams" Type="SchedulingServiceDataAccessModel.Store.EmployeeTeams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeTeams">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EmployeeTeams_dbo_Teams_Team_Id">
+          <End Role="Teams" Type="SchedulingServiceDataAccessModel.Store.Teams" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EmployeeTeams" Type="SchedulingServiceDataAccessModel.Store.EmployeeTeams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeTeams">
+              <PropertyRef Name="Team_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Schedules_dbo_Client_Id">
+          <End Role="Clients" Type="SchedulingServiceDataAccessModel.Store.Clients" Multiplicity="1" />
+          <End Role="Schedules" Type="SchedulingServiceDataAccessModel.Store.Schedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Schedules_dbo_Employees_Id">
+          <End Role="Employees" Type="SchedulingServiceDataAccessModel.Store.Employees" Multiplicity="1" />
+          <End Role="Schedules" Type="SchedulingServiceDataAccessModel.Store.Schedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchedulingServiceDataAccessModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SchedulingServiceEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Branches" EntityType="SchedulingServiceDataAccessModel.Branch" />
+          <EntitySet Name="ClientNotes" EntityType="SchedulingServiceDataAccessModel.ClientNote" />
+          <EntitySet Name="Clients" EntityType="SchedulingServiceDataAccessModel.Client" />
+          <EntitySet Name="EmployeeNotes" EntityType="SchedulingServiceDataAccessModel.EmployeeNote" />
+          <EntitySet Name="Employees" EntityType="SchedulingServiceDataAccessModel.Employee" />
+          <EntitySet Name="Schedules" EntityType="SchedulingServiceDataAccessModel.Schedule" />
+          <EntitySet Name="Teams" EntityType="SchedulingServiceDataAccessModel.Team" />
+          <AssociationSet Name="FK_dbo_Clients_dbo_Branches_BranchId" Association="SchedulingServiceDataAccessModel.FK_dbo_Clients_dbo_Branches_BranchId">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_Branches_BranchId" Association="SchedulingServiceDataAccessModel.FK_dbo_Employees_dbo_Branches_BranchId">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientNotes_dbo_Client_Id" Association="SchedulingServiceDataAccessModel.FK_dbo_ClientNotes_dbo_Client_Id">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientNotes" EntitySet="ClientNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Schedules_dbo_Client_Id" Association="SchedulingServiceDataAccessModel.FK_dbo_Schedules_dbo_Client_Id">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Schedules" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EmployeeNotes_dbo_Employees_Id" Association="SchedulingServiceDataAccessModel.FK_dbo_EmployeeNotes_dbo_Employees_Id">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeeNotes" EntitySet="EmployeeNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Schedules_dbo_Employees_Id" Association="SchedulingServiceDataAccessModel.FK_dbo_Schedules_dbo_Employees_Id">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Schedules" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="BranchTeams" Association="SchedulingServiceDataAccessModel.BranchTeams">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Teams" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="ClientTeams" Association="SchedulingServiceDataAccessModel.ClientTeams">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Teams" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeTeams" Association="SchedulingServiceDataAccessModel.EmployeeTeams">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Teams" EntitySet="Teams" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Clients" Relationship="SchedulingServiceDataAccessModel.FK_dbo_Clients_dbo_Branches_BranchId" FromRole="Branches" ToRole="Clients" />
+          <NavigationProperty Name="Employees" Relationship="SchedulingServiceDataAccessModel.FK_dbo_Employees_dbo_Branches_BranchId" FromRole="Branches" ToRole="Employees" />
+          <NavigationProperty Name="Teams" Relationship="SchedulingServiceDataAccessModel.BranchTeams" FromRole="Branches" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="ClientNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Client_Id" Type="Int32" Nullable="false" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Client" Relationship="SchedulingServiceDataAccessModel.FK_dbo_ClientNotes_dbo_Client_Id" FromRole="ClientNotes" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ExtId" Type="Int32" />
+          <Property Name="BranchId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="Zip" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="PseudoPerson" Type="Boolean" Nullable="false" />
+          <Property Name="FamilyCaregiverClient" Type="Boolean" Nullable="false" />
+          <Property Name="IvrClient" Type="Boolean" Nullable="false" />
+          <Property Name="ManagedCareClient" Type="Boolean" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
+          <NavigationProperty Name="Branch" Relationship="SchedulingServiceDataAccessModel.FK_dbo_Clients_dbo_Branches_BranchId" FromRole="Clients" ToRole="Branches" />
+          <NavigationProperty Name="ClientNotes" Relationship="SchedulingServiceDataAccessModel.FK_dbo_ClientNotes_dbo_Client_Id" FromRole="Clients" ToRole="ClientNotes" />
+          <NavigationProperty Name="Schedules" Relationship="SchedulingServiceDataAccessModel.FK_dbo_Schedules_dbo_Client_Id" FromRole="Clients" ToRole="Schedules" />
+          <NavigationProperty Name="Teams" Relationship="SchedulingServiceDataAccessModel.ClientTeams" FromRole="Clients" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="EmployeeNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Id" Type="Int32" Nullable="false" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Employee" Relationship="SchedulingServiceDataAccessModel.FK_dbo_EmployeeNotes_dbo_Employees_Id" FromRole="EmployeeNotes" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ExtId" Type="Int32" />
+          <Property Name="BranchId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="Zip" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="IsAmpUser" Type="Boolean" Nullable="false" />
+          <Property Name="PseudoPerson" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Branch" Relationship="SchedulingServiceDataAccessModel.FK_dbo_Employees_dbo_Branches_BranchId" FromRole="Employees" ToRole="Branches" />
+          <NavigationProperty Name="EmployeeNotes" Relationship="SchedulingServiceDataAccessModel.FK_dbo_EmployeeNotes_dbo_Employees_Id" FromRole="Employees" ToRole="EmployeeNotes" />
+          <NavigationProperty Name="Schedules" Relationship="SchedulingServiceDataAccessModel.FK_dbo_Schedules_dbo_Employees_Id" FromRole="Employees" ToRole="Schedules" />
+          <NavigationProperty Name="Teams" Relationship="SchedulingServiceDataAccessModel.EmployeeTeams" FromRole="Employees" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="ExtId" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceCode" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Client" Relationship="SchedulingServiceDataAccessModel.FK_dbo_Schedules_dbo_Client_Id" FromRole="Schedules" ToRole="Clients" />
+          <NavigationProperty Name="Employee" Relationship="SchedulingServiceDataAccessModel.FK_dbo_Schedules_dbo_Employees_Id" FromRole="Schedules" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Branches" Relationship="SchedulingServiceDataAccessModel.BranchTeams" FromRole="Teams" ToRole="Branches" />
+          <NavigationProperty Name="Clients" Relationship="SchedulingServiceDataAccessModel.ClientTeams" FromRole="Teams" ToRole="Clients" />
+          <NavigationProperty Name="Employees" Relationship="SchedulingServiceDataAccessModel.EmployeeTeams" FromRole="Teams" ToRole="Employees" />
+        </EntityType>
+        <Association Name="FK_dbo_Clients_dbo_Branches_BranchId">
+          <End Role="Branches" Type="SchedulingServiceDataAccessModel.Branch" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Clients" Type="SchedulingServiceDataAccessModel.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employees_dbo_Branches_BranchId">
+          <End Role="Branches" Type="SchedulingServiceDataAccessModel.Branch" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employees" Type="SchedulingServiceDataAccessModel.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClientNotes_dbo_Client_Id">
+          <End Role="Clients" Type="SchedulingServiceDataAccessModel.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClientNotes" Type="SchedulingServiceDataAccessModel.ClientNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientNotes">
+              <PropertyRef Name="Client_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Schedules_dbo_Client_Id">
+          <End Role="Clients" Type="SchedulingServiceDataAccessModel.Client" Multiplicity="1" />
+          <End Role="Schedules" Type="SchedulingServiceDataAccessModel.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EmployeeNotes_dbo_Employees_Id">
+          <End Role="Employees" Type="SchedulingServiceDataAccessModel.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EmployeeNotes" Type="SchedulingServiceDataAccessModel.EmployeeNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeNotes">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Schedules_dbo_Employees_Id">
+          <End Role="Employees" Type="SchedulingServiceDataAccessModel.Employee" Multiplicity="1" />
+          <End Role="Schedules" Type="SchedulingServiceDataAccessModel.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BranchTeams">
+          <End Role="Branches" Type="SchedulingServiceDataAccessModel.Branch" Multiplicity="*" />
+          <End Role="Teams" Type="SchedulingServiceDataAccessModel.Team" Multiplicity="*" />
+        </Association>
+        <Association Name="ClientTeams">
+          <End Role="Clients" Type="SchedulingServiceDataAccessModel.Client" Multiplicity="*" />
+          <End Role="Teams" Type="SchedulingServiceDataAccessModel.Team" Multiplicity="*" />
+        </Association>
+        <Association Name="EmployeeTeams">
+          <End Role="Employees" Type="SchedulingServiceDataAccessModel.Employee" Multiplicity="*" />
+          <End Role="Teams" Type="SchedulingServiceDataAccessModel.Team" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchedulingServiceDataAccessModelStoreContainer" CdmEntityContainer="SchedulingServiceEntities">
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="SchedulingServiceDataAccessModel.Branch">
+              <MappingFragment StoreEntitySet="Branches">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientNotes">
+            <EntityTypeMapping TypeName="SchedulingServiceDataAccessModel.ClientNote">
+              <MappingFragment StoreEntitySet="ClientNotes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="SchedulingServiceDataAccessModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ExtId" ColumnName="ExtId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="PseudoPerson" ColumnName="PseudoPerson" />
+                <ScalarProperty Name="FamilyCaregiverClient" ColumnName="FamilyCaregiverClient" />
+                <ScalarProperty Name="IvrClient" ColumnName="IvrClient" />
+                <ScalarProperty Name="ManagedCareClient" ColumnName="ManagedCareClient" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeNotes">
+            <EntityTypeMapping TypeName="SchedulingServiceDataAccessModel.EmployeeNote">
+              <MappingFragment StoreEntitySet="EmployeeNotes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="SchedulingServiceDataAccessModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ExtId" ColumnName="ExtId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="IsAmpUser" ColumnName="IsAmpUser" />
+                <ScalarProperty Name="PseudoPerson" ColumnName="PseudoPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="SchedulingServiceDataAccessModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedules">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="ExtId" ColumnName="ExtId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ServiceCode" ColumnName="ServiceCode" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="SchedulingServiceDataAccessModel.Team">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BranchTeams" TypeName="SchedulingServiceDataAccessModel.BranchTeams" StoreEntitySet="BranchTeams">
+            <EndProperty Name="Branches">
+              <ScalarProperty Name="Id" ColumnName="Branch_Id" />
+            </EndProperty>
+            <EndProperty Name="Teams">
+              <ScalarProperty Name="Id" ColumnName="Team_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ClientTeams" TypeName="SchedulingServiceDataAccessModel.ClientTeams" StoreEntitySet="ClientTeams">
+            <EndProperty Name="Clients">
+              <ScalarProperty Name="Id" ColumnName="Client_Id" />
+            </EndProperty>
+            <EndProperty Name="Teams">
+              <ScalarProperty Name="Id" ColumnName="Team_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="EmployeeTeams" TypeName="SchedulingServiceDataAccessModel.EmployeeTeams" StoreEntitySet="EmployeeTeams">
+            <EndProperty Name="Employees">
+              <ScalarProperty Name="Id" ColumnName="Employee_Id" />
+            </EndProperty>
+            <EndProperty Name="Teams">
+              <ScalarProperty Name="Id" ColumnName="Team_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

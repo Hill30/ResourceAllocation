@@ -1,0 +1,40 @@
+<!--page-top-links-->
+<!--div class="page-top-links">
+
+	<div class="row">
+		<div class="col-xs-8">
+
+			<ul class="breadcrumb">
+				<li><a href="#">Call Off</a></li>
+				<li><a href="#">Family Emergency</a></li>
+				<li><a href="#">Choose Date</a></li>
+				<li class="active">Impacted Clients</li>
+			</ul>
+
+		</div>
+		<div class="col-xs-4 text-right">
+			<a href="#" class="link-tohome"><span class="glyphicon glyphicon-caret-left"></span>Return to Home</a>
+		</div>
+	</div>
+
+</div-->
+<!--/page-top-links-->
+
+
+<ul class="breadcrumb" ng-controller="breadcrumbsController">
+	<li>
+		<a ng-click="goToDetails()">Person details</a>
+	</li>
+
+	<li class="menu-step">
+		<span>{{processContainer.process.name}}</span>
+	</li>
+
+	<li class="menu-step" ng-if="processContainer.process.reasons">
+		<span>{{processContainer.reason.name}}</span>
+	</li>
+
+	<li ng-repeat="item in steps" ng-class="{active: item.name === processContainer.step.name}">
+		<a ng-click="gotToStep(item)">{{item.name.substring(0,1).toUpperCase() + item.name.substring(1)}}</a>
+	</li>
+</ul>
