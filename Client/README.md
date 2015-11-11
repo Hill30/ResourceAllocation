@@ -1,4 +1,4 @@
-Contact Center Workflow
+Resource Allocation
 ==============
 Reference implementation web application implementation (client side)
 
@@ -9,8 +9,8 @@ To run:
 * install [Grunt](https://github.com/gruntjs/grunt) package globally.  `npm install -g grunt-cli`
 * install [Karma](http://karma-runner.github.io/0.10/index.html) package globally, version = 0.10.0  `npm install -g karma@0.10.0`
 * install [Bower] (https://github.com/bower/bower) ` npm install -g bower `
-* clone the ContactCenterWorkflow repository `git clone git@github.com:Addus/ContactCenterWorkflow.git`
-* `cd ContactCenterWorkflow/Client`
+* clone the ResourceAllocation repository `git clone git@github.com:Hill30/ResourceAllocation.git`
+* `cd ResourceAllocation/Client`
 * install nodejs dependencies `npm install`
 * remove directives depend on bower `grunt clean:bower`
 * install bower dependencies `bower install`
