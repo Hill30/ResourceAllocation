@@ -5,6 +5,7 @@
     "Addus": "git://github.com/Hill30/WebApiComponentsAddus.git#4768490c58d5c052bee5d4cba2bd4756b701c07e",
     "Hill30": "git://github.com/Hill30/WebApiComponents.git#a549c5c91a4d939d229e7813116c48e4912d4699",
     "angular-route": "1.2.16",
-    "bootstrap": "3.0.0"
+    "bootstrap": "3.0.0",
+    "angular-ui-calendar": "1.0.1"
   }
 }

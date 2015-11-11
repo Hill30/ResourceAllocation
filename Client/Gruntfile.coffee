@@ -104,13 +104,16 @@ module.exports = (grunt) ->
 				cwd: "./.temp"
 				dist: "./src/devScripts.html"
 				src: [
-					"vendors/jquery/jquery.js"
+					"vendors/jquery/dist/jquery.js"
 					"vendors/**/angular.js"
 					"vendors/**/angular-resource.js"
 					"vendors/**/angular-route.js"
 					"vendors/**/ui-bootstrap-tpls.js"
 					"vendors/**/module/*.js"
 					"vendors/**/scripts/*.js"
+					"vendors/**/src/calendar.js"
+					"vendors/**/dist/fullcalendar.js"
+					"vendors/**/dist/jcal.js"
 					"!**/test/**"
 					"scripts/config/development.js"
 					"scripts/app.js"
@@ -446,13 +449,16 @@ module.exports = (grunt) ->
 					beautify: true
 				files:
 					'./.temp/scripts/jquery.min.js': [
-						'./.temp/vendors/jquery/jquery.js'
+						'./.temp/vendors/jquery/dist/jquery.js'
 					]
 					'./.temp/scripts/vendors.min.js': [
 						'./.temp/vendors/angular/angular.js'
 						'./.temp/vendors/angular-resource/angular-resource.js'
 						'./.temp/vendors/angular-route/angular-route.js'
 						'./.temp/vendors/angular-bootstrap/ui-bootstrap-tpls.js'
+						'./.temp/vendors/fullcalendar/dist/fullcalendar.js'
+						'./.temp/vendors/fullcalendar/dist/jcal.js'
+						'./.temp/vendors/angular-ui-calendar/calendar.js'
 						"./.temp/vendors/**/module/*.js"
 						"./.temp/vendors/**/scripts/*.js"
 					],

@@ -1,4 +1,4 @@
-app = angular.module 'app', ['envConfig', 'ngResource', 'ngRoute', 'ui.bootstrap', 'ui.scroll', 'addus', 'hill30']
+app = angular.module 'app', ['envConfig', 'ngResource', 'ngRoute', 'ui.bootstrap', 'ui.scroll', 'addus', 'hill30', 'ui.calendar']
 
 angular.module('app').run ['$route', '$rootScope', '$location', ($route, $rootScope, $location) ->
 
