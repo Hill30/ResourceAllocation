@@ -62,24 +62,6 @@ module.exports = (grunt) ->
 		grunt.file.delete(grunt.template.process(data.devScripts)) if data.devScripts
 		grunt.log.writeln "File \"" + "./.temp/index.html" + "\" created."
 
-	grunt.registerMultiTask 'postTestData', 'Post data to testLink', ->
-		done = this.async()
-		testLinkApi = require './test/libs/testLinkApi'
-		exportFile = @data.src
-		return grunt.log.warn('src is required') if !exportFile
-		testcases = grunt.file.read exportFile
-		testcases = JSON.parse(testcases)
-		#console.log testcases 
-		return grunt.verbose.warn('No testcases found') if !testcases.length is 0
-		results = []
-		testcases.forEach (testcase, length) ->
-			testLinkApi(testcase, (result) ->
-				results.push(result)
-				#console.log result
-				if results.length == testcases.length
-					done()
-			)
-		
 	grunt.initConfig
 	# Deletes deployment and temp directories.
 	# The temp directory is used during the build process.
@@ -87,9 +69,39 @@ module.exports = (grunt) ->
 	# These directories should be deleted before subsequent builds.
 	# These directories are not committed to source control.
 
-		postTestData:
-			scripts:
-				src: "./test/export.json"
+		wait_async:
+			testlink:
+				options:
+					wait: (done) ->
+						mysql = require('mysql')
+						connection = mysql.createConnection(
+							host: 'localhost'
+							user: 'root'
+							password: 'pass'
+							database: 'bitnami_testlink')
+						connection.connect()
+						testLinkApi = require './test/libs/testLinkApi'
+						exportFile = "./test/export.json"
+						return grunt.log.warn('src is required') if !exportFile
+						testcases = grunt.file.read exportFile
+						testcases = JSON.parse(testcases)
+						#console.log testcases
+						return grunt.verbose.warn('No testcases found') if !testcases.length is 0
+						results = []
+						testcases.forEach (testcase, length) ->
+							testLinkApi(connection, testcase, (result) ->
+								results.push(result)
+								#console.log result
+								#console.log testcases.length, results.length
+								if results.length == testcases.length
+									#console.log testcases.length
+									connection.end()
+									done()
+							)
+
+					timeout: 50 * 1000
+					isForce: true
+
 
 		start:
 			scripts:
@@ -108,6 +120,7 @@ module.exports = (grunt) ->
 					"vendors/**/angular.js"
 					"vendors/**/angular-resource.js"
 					"vendors/**/angular-route.js"
+					"vendors/angular-ui-scroll/dist/ui-scroll.js"
 					"vendors/**/ui-bootstrap-tpls.js"
 					"vendors/**/module/*.js"
 					"vendors/**/scripts/*.js"
@@ -145,6 +158,7 @@ module.exports = (grunt) ->
 			bower:
 				src: [
 					'./src/libs/vendors/'
+					'./src/styles/vendors/'
 					'./bower_components/'
 					'./src/views/vendors/'
 					'./test/vendors/'
@@ -161,7 +175,7 @@ module.exports = (grunt) ->
 					'./.temp/'
 				]
 
-	# Compile CoffeeScript (.coffee) files to JavaScript (.js).
+		# Compile CoffeeScript (.coffee) files to JavaScript (.js).
 		coffee:
 			dev:
 				files: [
@@ -200,8 +214,8 @@ module.exports = (grunt) ->
 			styles:
 				files:
 					'./.temp/styles/custom/styles.css': ['./.temp/styles/custom/styles.less']
-	#options:
-	#  sourcemap: true
+				#options:
+				#  sourcemap: true
 
 		connect:
 			app:
@@ -376,13 +390,12 @@ module.exports = (grunt) ->
 					layout: 'byType'
 					install: true
 					copy: false
-					
+
 	# Runs tests using karma
 		karma:
 			unit:
 				options:
 					autoWatch: true
-					#browsers: ['c:/Program Files (x86)/Google/Chrome/Application/chrome.exe']
 					browsers: ['PhantomJS']
 					singleRun: true
 					colors: true
@@ -392,43 +405,34 @@ module.exports = (grunt) ->
 					runnerPort: 9100
 			e2e:
 				options:
-				#autoWatch: true
-				#browsers: ['Chrome']
-				#colors: true
+					#autoWatch: true
+					#browsers: ['Chrome']
+					#colors: true
 					configFile: './test/karma-e2e.conf.js'
-	#keepalive: true
-	#port: 8082
-	#reporters: ['progress']
-	#runnerPort: 9102
-	#singleRun: true
-	#urlRoot: '/__e2e/'
-	#proxies:
-	#  '/' : 'http://localhost:5000/'
+					#keepalive: true
+					#port: 8082
+					#reporters: ['progress']
+					#runnerPort: 9102
+					#singleRun: true
+					#urlRoot: '/__e2e/'
+					#proxies:
+					#  '/' : 'http://localhost:5000/'
 
 	# Runs test using Protractor
-		protractor: 
-				options: 
+		protractor:
+				options:
 					keepAlive: false
 					noColor: false
-				e2e: 
-					options: 
+				e2e:
+					options:
 						configFile: "./test/e2e.conf.js"
-				addus: 
-					options: 
+				addus:
+					options:
 						configFile: "./test/e2e-addus.conf.js"
-				public:
+				qa:
 					options:
-						configFile: "./test/e2e-public.conf.js"
+						configFile: "./test/e2e-qa.conf.js"
 						keepAlive: true
-				dev:
-					options:
-						configFile: "./test/e2e-dev.conf.js"
-						keepAlive: true
-				qa: 
-					options: 
-						configFile: "./test/e2e-qas.conf.js"
-						keepAlive: false
-
 
 	# Minifiy index.html.
 	# Extra white space and comments will be removed.
@@ -439,7 +443,6 @@ module.exports = (grunt) ->
 			prod:
 				files:
 					'./.temp/index.min.html': './.temp/index.html'
-
 
 		uglify:
 			prod:
@@ -455,6 +458,7 @@ module.exports = (grunt) ->
 						'./.temp/vendors/angular/angular.js'
 						'./.temp/vendors/angular-resource/angular-resource.js'
 						'./.temp/vendors/angular-route/angular-route.js'
+						'./.temp/vendors/angular-ui-scroll/dist/ui-scroll.js'
 						'./.temp/vendors/angular-bootstrap/ui-bootstrap-tpls.js'
 						'./.temp/vendors/fullcalendar/dist/fullcalendar.js'
 						'./.temp/vendors/fullcalendar/dist/jcal.js'
@@ -462,6 +466,21 @@ module.exports = (grunt) ->
 						"./.temp/vendors/**/module/*.js"
 						"./.temp/vendors/**/scripts/*.js"
 					],
+					'./.temp/scripts/scripts.min.js': [
+						'./.temp/scripts/env.js'
+						'./.temp/scripts/scripts.js'
+						'./.temp/scripts/views.js'
+						'./.temp/scripts/directives/*.js'
+						'./.temp/scripts/services/*.js'
+						'./.temp/scripts/controllers/*.js'
+						'./.temp/scripts/filters/*.js'
+					]
+			miniprod:
+				options:
+					mangle: false
+					compress: false
+					beautify: true
+				files:
 					'./.temp/scripts/scripts.min.js': [
 						'./.temp/scripts/env.js'
 						'./.temp/scripts/scripts.js'
@@ -481,13 +500,17 @@ module.exports = (grunt) ->
 			css:
 				src: ['bower_components/bootstrap/dist/css/bootstrap.css', '.temp/styles/custom/styles.css']
 				dest: '.temp/styles/custom/styles.css'
-  
 
 	# This file is then included in the output automatically.  AngularJS will use it instead of going to the file system for the views, saving requests.  Notice that the view content is actually minified.  :)
 		ngTemplateCache:
 			views:
 				files:
 					'./.temp/scripts/views.js': ['./.temp/views/**/*.html', './.temp/vendors/**/*.html']
+				options:
+					trim: './.temp/'
+			mandatory:
+				files:
+					'./.temp/scripts/viewsMandatory.js': ['./.temp/views/dialogs/**/*.html']
 				options:
 					trim: './.temp/'
 
@@ -526,7 +549,7 @@ module.exports = (grunt) ->
 				files: './test/**/*.*'
 				tasks: []
 
-		# Used to keep the web server alive
+			# Used to keep the web server alive
 			none:
 				files: 'none'
 				options:
@@ -559,6 +582,7 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-less'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
 	grunt.loadNpmTasks 'grunt-contrib-concat'
+
 	# Express server + LiveReload
 	# grunt.loadNpmTasks 'grunt-express'
 
@@ -582,6 +606,9 @@ module.exports = (grunt) ->
 	# Enter the following command at the command line to execute this build task:
 	# grunt test
 
+	# Async grunt
+	grunt.loadNpmTasks 'grunt-wait-async'
+
 	grunt.registerTask 'test', [
 		'karma:unit'
 	]
@@ -592,25 +619,16 @@ module.exports = (grunt) ->
 
 	grunt.registerTask 'e2e-ci', [
 		'protractor:e2e'
-	]
-
-	grunt.registerTask 'e2e-ci-addus', [
-		'protractor:addus'
-	]
-
-	grunt.registerTask 'e2e-ci-public', [
-		'protractor:public'
-		'postTestData'
+		'wait_async:testlink'
 	]
 
 	grunt.registerTask 'e2e-ci-dev', [
 		'protractor:dev'
-		'postTestData'
+		'wait_async:testlink'
 	]
 
-	grunt.registerTask 'e2e-ci-qa', [
-		'protractor:qa'
-		'postTestData'
+	grunt.registerTask 'e2e-ci-addus', [
+		'protractor:addus'
 	]
 
 	# Starts a web server
@@ -632,10 +650,11 @@ module.exports = (grunt) ->
 		'copy:bower'
 		'copy:scriptSource'
 		'coffee:dev'
-		'fileconstruct'
-		'wrap:dev'
 		'copy:styleSource'
 		'template:views'
+		'ngTemplateCache:mandatory'
+		'fileconstruct'
+		'wrap:dev'
 		'copy:img'
 		'copy:favicon'
 		'copy:csslib'
@@ -673,7 +692,7 @@ module.exports = (grunt) ->
 		'concat:css'
 		'cssmin'
 		'template:views'
-		'ngTemplateCache'
+		'ngTemplateCache:views'
 		'uglify'
 		'imagemin'
 		'copy:fonts'
@@ -697,7 +716,7 @@ module.exports = (grunt) ->
 		'concat:css'
 		'cssmin'
 		'template:views'
-		'ngTemplateCache'
+		'ngTemplateCache:views'
 		'uglify'
 		'imagemin'
 		'copy:fonts'
@@ -710,3 +729,11 @@ module.exports = (grunt) ->
 		'watch'
 	]
 
+	grunt.registerTask 'miniprod', [
+		'copy:scriptSource'
+		'coffee:prod'
+		'template:views'
+		'ngTemplateCache:views'
+		'uglify:miniprod'
+		'copy:prod'
+	]

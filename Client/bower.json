@@ -2,10 +2,14 @@
   "name": "ContactCenterWorkflow",
   "version": "0.0.1",
   "dependencies": {
-    "Addus": "git://github.com/Hill30/WebApiComponentsAddus.git#4768490c58d5c052bee5d4cba2bd4756b701c07e",
-    "Hill30": "git://github.com/Hill30/WebApiComponents.git#a549c5c91a4d939d229e7813116c48e4912d4699",
-    "angular-route": "1.2.16",
+    "Addus": "git://github.com/Hill30/WebApiComponentsAddus.git#1.2.5",
+    "Hill30": "git://github.com/Hill30/WebApiComponents.git#0df3d73c38e50c858434242c24d3a764b42aca62",
+    "angular-route": "1.3.14",
     "bootstrap": "3.0.0",
     "angular-ui-calendar": "1.0.1"
+  },
+  "resolutions": {
+    "angular": "1.3.14",
+    "jquery": "2.1.4"
   }
 }
