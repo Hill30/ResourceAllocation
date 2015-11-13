@@ -498,7 +498,7 @@ module.exports = (grunt) ->
 
 		concat:
 			css:
-				src: ['bower_components/bootstrap/dist/css/bootstrap.css', '.temp/styles/custom/styles.css']
+				src: ['bower_components/bootstrap/dist/css/bootstrap.css', '.temp/styles/custom/styles.css', 'bower_components/fullcalendar/dist/fullcalendar.css']
 				dest: '.temp/styles/custom/styles.css'
 
 	# This file is then included in the output automatically.  AngularJS will use it instead of going to the file system for the views, saving requests.  Notice that the view content is actually minified.  :)
