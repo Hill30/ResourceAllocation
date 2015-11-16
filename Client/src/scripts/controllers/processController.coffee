@@ -1,6 +1,6 @@
 angular.module('app').controller('processController', [
-	'$scope', '$location', 'processContainer', 'notesDialogService', 'popup', 'confirmation'
-	($scope, $location, processContainer, notesDialogService, popup, confirmation) ->
+	'$scope', '$location', 'processContainer', 'notesDialogService', 'popup', 'confirmation', 'personResource', 'personDataService'
+	($scope, $location, processContainer, notesDialogService, popup, confirmation, personResource, personDataService) ->
 
 		$scope.isProcessMenuExpanded = false
 
@@ -47,5 +47,22 @@ angular.module('app').controller('processController', [
 						locationChangeStartOff()
 						$location.path(path)
 				).openDialog()
+
+
+		personDataService.initializeByRouteParams()
+		if not $scope.person.type
+			console.log 'detailsController: there is no call/person data in route params'
+			$location.path('/home')
+			return
+
+		person = personDataService.getPerson()
+		$scope.person.typeFull = person.typeFull
+		personResource.get[$scope.person.typeFull]({ id: $scope.person.id }, (result) ->
+			$scope.person = result
+		, () ->
+			console.log 'detailsController: can\'t load call/person data from server'
+			$location.path('/home')
+			return false
+		)
 
 ])

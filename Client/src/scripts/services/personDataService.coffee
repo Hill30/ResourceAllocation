@@ -21,28 +21,11 @@ angular.module('app').service('personDataService', [
 			setPersonTypeFull()
 
 		initializeByRouteParams = () ->
-			getCallFromRouteParams()
 			getPersonFromRouteParams()
 			setPersonTypeFull()
 
 
 		# getting from $route current params
-
-		getCallFromRouteParams = () ->
-			routeParams = $route.current.params
-			if routeParams.callType is 'inbound'
-				call.type = 'I'
-			else if routeParams.callType is 'outbound'
-				call.type = '0'
-			else if routeParams.callType is 'search'
-				call.type = 'A'
-			else
-				console.log 'personDataService: there is no correct call type'
-				resetCall()
-				return
-
-			call.typeFull = routeParams.callType
-
 		getPersonFromRouteParams = () ->
 			routeParams = $route.current.params
 			if routeParams.personType is 'client'

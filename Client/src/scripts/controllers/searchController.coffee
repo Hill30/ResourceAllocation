@@ -1,5 +1,5 @@
 angular.module('app')
-	.controller('callController', [
+	.controller('searchController', [
 		'$scope', '$location', '$routeParams', 'debounce', 'personsResource', 'personDataService', 'processContainer'
 		($scope, $location, $routeParams, debounce, personsResource, personDataService, processContainer) ->
 
@@ -25,13 +25,6 @@ angular.module('app')
 			# set call
 
 			call = $scope.call = {}
-
-			switch $routeParams.type
-				when 'inbound' then call.type = "I"
-				when 'outbound' then call.type = "O"
-				when 'search' then call.type = "S"
-			if not call.type
-				return console.log 'Can\'t parse $routeParams. There is no call type.'
 
 			call.typeFull = $routeParams.type
 
@@ -112,7 +105,7 @@ angular.module('app')
 
 			$scope.pickPerson = (person) ->
 				personDataService.initialize(call, person)
-				$location.path($scope.call.typeFull + '/' + $scope.person.typeFull + '/' + person.id)
+				$location.path($scope.person.typeFull + '/' + person.id)
 
 
 			# subscriptions

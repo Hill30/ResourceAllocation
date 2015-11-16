@@ -1,7 +1,5 @@
 <div class="main-container main-container-with-menu-reasons" ng-controller="processController">
 
-	<div ng-include="'views/process/processesMenu.html'"></div>
-
 	<div class="container">
 
 		<div class="row">
@@ -14,24 +12,9 @@
 
 			<div class="col-xs-9">
 
-				<div ng-if="processContainer.step.name" ng-include="'views/process/breadcrumbs.html'"></div>
-
-				<div ng-switch="processContainer.step.name">
-					<div ng-switch-when="dates">
-						<div ng-include="'views/process/dates.html'"></div>
-					</div>
-					<div ng-switch-when="visits">
-						<div ng-include="'views/process/visits.html'"></div>
-					</div>
-					<div ng-switch-when="note">
-						<div ng-include="'views/process/note.html'"></div>
-					</div>
-					<div ng-switch-default>
-						<div ng-include="'views/process/details.html'"></div>
-					</div>
-				</div>
-
-				<div ng-if="processContainer.step.name" ng-include="'views/process/commonControls.html'"></div>
+				<div ng-include="'views/process/dates.html'"></div>
+				
+				<div ng-include="'views/process/commonControls.html'"></div>
 
 			</div>
 
