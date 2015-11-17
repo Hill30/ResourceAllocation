@@ -524,7 +524,7 @@ module.exports = (grunt) ->
 					'copy:scripts'
 				]
 				options:
-					livereload: false
+					livereload: true
 			styles:
 				files: './src/styles/**/*.less'
 				tasks: [
@@ -533,7 +533,7 @@ module.exports = (grunt) ->
 					'copy:styles'
 				]
 				options:
-					livereload: false
+					livereload: true
 			views:
 				files: './src/views/**/*.html'
 				tasks: [
@@ -548,6 +548,8 @@ module.exports = (grunt) ->
 			test:
 				files: './test/**/*.*'
 				tasks: []
+				options: 
+					livereload: false
 
 			# Used to keep the web server alive
 			none:

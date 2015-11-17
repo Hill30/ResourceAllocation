@@ -145,6 +145,20 @@ module.exports = (app, options) ->
 		id = req.params.id
 		res.json person for person in persons when parseInt(person.id, 10) is parseInt(id, 10) and person.type is 'C'
 
+	app.get '/api/employee', (req, res) ->
+		search = req.query.name
+		count = req.query.count
+		newPerson = persons.filter (x) ->
+			x.name.indexOf(search) isnt -1 and x.type is 'E'
+		res.json newPerson
+
+	app.get '/api/client', (req, res) ->
+		search = req.query.name
+		count = req.query.count
+		newPerson = persons.filter (x) ->
+			x.name.indexOf(search) isnt -1 and x.type is 'C'
+		res.json newPerson
+		
 	app.get '/api/notes', (req, res) ->
 		result = notes
 

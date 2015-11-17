@@ -1,4 +1,154 @@
-<div ng-controller="datesController">
+<div>
+	<form novalidate name="mainForm" class="col-xs-4">
+		<!--select-->
+		<div>Choose Person:</div>
+		<multiselect 
+			 class="msg-dialog"
+			 ms-text="{{eventCal.personOutput}}"
+			 ng-model="eventCal.Person"
+			 ng-model-options="{debounce: { 'default': 350 }}"
+			 ms-on-search="onPersonSearch"
+			 ms-restore-check="checked"
+			 change="onPersonChange()"
+			 options="p.name for p in eventCal.PersonListToSelect"
+			 ms-reset="recipientListUIResetObject"></multiselect>
+
+		<!--/select-->
+		<div>Start Date:</div>
+		<div class="input-group input-group-sm" class="">	
+			<input
+					name="startDate"
+					type="text"
+					class="form-control"
+					ng-class="{'form-control-invalid': (mainForm.startDate.$error.dateFormat || mainForm.startDate.$error.required) && mainForm.$submitted}"
+					required="required"
+					inputmask-date
+					inputmask-date-year="true"
+					ng-model="eventCal.startDate"
+					datepicker-popup="MM-dd-yyyy"
+					is-open="isServiceDateStartPopupOpened"
+					close-text="Close"
+					ng-enter="addEvent()">
+
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default"
+								ng-click="isServiceDateStartPopupOpened = !isServiceDateStartPopupOpened; $event.preventDefault(); $event.stopPropagation()">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</span>
+		</div>
+
+		<div class="required-flag"></div>
+
+		<div ng-show="(mainForm.startDate.$error.dateFormat || mainForm.startDate.$error.required) && mainForm.$submitted"
+			 class="alert-wrap">
+			<div class="alert-control alert alert-danger">
+				<ul class="list-inline">
+					<li ng-show="mainForm.startDate.$error.required">
+						This field is required!
+					</li>
+					<li ng-show="!mainForm.startDate.$error.required && mainForm.startDate.$error.dateFormat">
+						Date format is invalid
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<input
+				name="startTime"
+				type="text"
+				class="form-control input-sm"
+				ng-class="{'form-control-invalid': (mainForm.startTime.$error.pattern || mainForm.startTime.$error.required) && mainForm.$submitted}"
+				required="required"
+				ng-pattern="/^(?:0?[0-9]|1[0-2]):[0-5][0-9] [ap]m$/"
+				inputmask-civilian-time
+				ng-model="eventCal.startTime"
+				ng-enter="addEvent()">
+
+		<div class="required-flag"></div>
+
+		<div ng-show="(mainForm.startTime.$error.pattern || mainForm.startTime.$error.required) && mainForm.$submitted "
+			 class="alert-wrap">
+			<div class="alert-control alert alert-danger">
+				<ul class="list-inline">
+					<li ng-show="mainForm.startTime.$error.required">
+						This field is required!
+					</li>
+					<li ng-show="!mainForm.startTime.$error.required && mainForm.startTime.$error.pattern">
+						Time format is invalid!
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div>Finish Date:</div>
+		<div class="input-group input-group-sm" class="">	
+			<input
+					name="finishDate"
+					type="text"
+					class="form-control"
+					ng-class="{'form-control-invalid': (mainForm.finishDate.$error.dateFormat || mainForm.finishDate.$error.required) && mainForm.$submitted}"
+					required="required"
+					inputmask-date
+					inputmask-date-year="true"
+					ng-model="eventCal.finishDate"
+					datepicker-popup="MM-dd-yyyy"
+					is-open="isServiceDateFinishPopupOpened"
+					close-text="Close"
+					ng-enter="addEvent()">
+
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default"
+								ng-click="isServiceDateFinishPopupOpened = !isServiceDateFinishPopupOpened; $event.preventDefault(); $event.stopPropagation()">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</span>
+		</div>
+
+		<div class="required-flag"></div>
+
+		<div ng-show="(mainForm.finishDate.$error.dateFormat || mainForm.finishDate.$error.required) && mainForm.$submitted"
+			 class="alert-wrap">
+			<div class="alert-control alert alert-danger">
+				<ul class="list-inline">
+					<li ng-show="mainForm.finishDate.$error.required">
+						This field is required!
+					</li>
+					<li ng-show="!mainForm.finishDate.$error.required && mainForm.finishDate.$error.dateFormat">
+						Date format is invalid
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<input
+				name="finishTime"
+				type="text"
+				class="form-control input-sm"
+				ng-class="{'form-control-invalid': (mainForm.finishTime.$error.pattern || mainForm.finishTime.$error.required) && mainForm.$submitted}"
+				required="required"
+				ng-pattern="/^(?:0?[0-9]|1[0-2]):[0-5][0-9] [ap]m$/"
+				inputmask-civilian-time
+				ng-model="eventCal.finishTime"
+				ng-enter="addEvent()">
+
+		<div class="required-flag"></div>
+
+		<div ng-show="(mainForm.finishTime.$error.pattern || mainForm.finishTime.$error.required) && mainForm.$submitted "
+			 class="alert-wrap">
+			<div class="alert-control alert alert-danger">
+				<ul class="list-inline">
+					<li ng-show="mainForm.finishTime.$error.required">
+						This field is required!
+					</li>
+					<li ng-show="!mainForm.finishTime.$error.required && mainForm.finishTime.$error.pattern">
+						Time format is invalid!
+					</li>
+				</ul>
+			</div>
+		</div>
+		<button class="btn" ng-click="addEvent()">Add Event</button>
+	</form>
+	<div style="clear:both;"><br></div>
 
 	<!--calendar-->
 	<div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
